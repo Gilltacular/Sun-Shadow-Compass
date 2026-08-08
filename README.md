@@ -37,7 +37,7 @@ This app replaces those tables with a lightweight, real-time digital calculation
 
 ## 🌑 Background & Historical Context
 
-During the Apollo program, astronauts trained with a physical cardboard sun compass — most notably for Apollo 15's stand-up EVA (SEVA). The device consisted of a central gnomon that cast a shadow onto a circular dial marked with lunar topographic reference lines. Crew aligned the shadow against known time-of-day data to determine heading.
+During the Apollo program, astronauts trained with a physical cardboard sun compass — most notably for Apollo 15's stand-up EVA (SEVA). The device consisted of a central gnomon that cast a shadow onto a circular dial marked with lunar topographic reference lines. Crew aligned the shadow against known time-of-day data to determine heading. (ref: https://apollo15hub.org/items/show/286)
 
 Key differences between Earth and lunar solar navigation:
 
