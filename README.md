@@ -126,6 +126,15 @@ The library's minimal API — `SunCalc.getPosition(date, lat, lng)` returning az
 
 ---
 
+## Known Dev Dependency Vulnerabilities
+
+- **esbuild <=0.24.2** — Dev server vulnerability (GHSA-67mh-4wv8-2f99)
+- **Impact:** Development server only. Production builds are unaffected.
+- **Status:** Accepted risk. Fix requires Vite 8 upgrade (breaking change). Deferred to post-implementation phase.
+- **Mitigation:** Avoid visiting untrusted websites while dev server is running.
+
+---
+
 ## 💡 Skills Demonstrated
 
 - **Research Methodology** — Evaluated multiple solar position algorithms against accuracy, performance, and licensing requirements before selecting a solution
