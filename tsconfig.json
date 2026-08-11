@@ -1,0 +1,10 @@
+{
+    "extends": "@tsconfig/svelte/tsconfig.json",
+    "include": ["src/**/*.ts", "src/**/*.svelte", "tests/**/*.test.ts"],
+    "compilerOptions": {
+        "isolatedModules": true,
+        "strict": true,
+        "moduleResolution": "bundler",
+        "baseUrl": "."
+    }
+}
