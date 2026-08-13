@@ -6,15 +6,15 @@
 
 @font-face {
     font-family: 'Roboto';
-    src: url('../assets/fonts/Roboto-Regular.ttf') format('truetype');
+    src: url('../assets/fonts/Roboto-Regular.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'Roboto-mono';
-    src: url('../assets/fonts/RobotoMono-Bold.ttf') format('truetype');
-    font-weight: 700;
+    font-family: 'Source Code Pro';
+    src: url('../assets/fonts/SourceCodePro-Black.woff2') format('woff2');
+    font-weight: 900;
     font-style: normal;
 }
 
@@ -26,6 +26,6 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Roboto-mono', monospace;
-    font-weight: 700;
+    font-family: 'Source Code Pro','Courier New', monospace;
+    font-weight: 900;
 }
