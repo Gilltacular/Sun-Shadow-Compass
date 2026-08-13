@@ -1,0 +1,14 @@
+[data-theme="daylight"] {
+    --bg-color: #ffffff;
+    --fg-color: #000000;
+}
+
+[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --fg-color: #f5f5f5;
+}
+
+[data-theme="redlight"] {
+    --bg-color: #1a0000;
+    --fg-color: #ff6600;
+}
