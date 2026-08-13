@@ -31,3 +31,10 @@ export function loadSettings(): Settings {
         return defaultSettings;
     }
 }
+
+
+export const settingsStore = writable(loadSettings());
+
+settingsStore.subscribe((value) => {
+    localStorage.setItem("sun-shadow-compass-settings", JSON.stringify(value));
+});
