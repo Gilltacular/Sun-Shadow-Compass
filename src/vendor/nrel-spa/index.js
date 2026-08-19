@@ -16,7 +16,7 @@ var SPA_ALL = 3;
 // src/index.ts
 var DEG = Math.PI / 180;
 var _load = typeof __require === "function" ? __require : __require2;
-var spa = _load("../lib/spa.cjs");
+var spa = _load("./spa.cjs");
 function assertFiniteNumber(value, name) {
   if (typeof value !== "number" || !isFinite(value)) {
     throw new TypeError(
