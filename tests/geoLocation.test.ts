@@ -21,7 +21,7 @@ describe('getUserLocation()', () => {
         };
 
         // Attach it to the global navigator
-        Object.defineProperty(global.navigator, 'geolocation', {
+        Object.defineProperty(globalThis.navigator, 'geolocation', {
             value: mockGeolocation,
             configurable: true
         });
@@ -43,7 +43,7 @@ describe('getUserLocation()', () => {
             })
         };
 
-        Object.defineProperty(global.navigator, 'geolocation', {
+        Object.defineProperty(globalThis.navigator, 'geolocation', {
             value: mockGeolocation,
             configurable: true
         });
