@@ -1,11 +1,4 @@
-import { createRequire as __cr } from 'node:module';
-const __require = __cr(import.meta.url);
-var __require2 = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x, {
-  get: (a, b) => (typeof require !== "undefined" ? require : a)[b]
-}) : x)(function(x) {
-  if (typeof require !== "undefined") return require.apply(this, arguments);
-  throw Error('Dynamic require of "' + x + '" is not supported');
-});
+import spa from './spa.js';
 
 // src/types.ts
 var SPA_ZA = 0;
@@ -15,8 +8,6 @@ var SPA_ALL = 3;
 
 // src/index.ts
 var DEG = Math.PI / 180;
-var _load = typeof __require === "function" ? __require : __require2;
-var spa = _load("./spa.cjs");
 function assertFiniteNumber(value, name) {
   if (typeof value !== "number" || !isFinite(value)) {
     throw new TypeError(
