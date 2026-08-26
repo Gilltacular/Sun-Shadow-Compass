@@ -1,12 +1,14 @@
 import { writable } from 'svelte/store';
 
+import type { Theme, Units, InputMode } from '../types/index';
+
 export interface Settings {
-    inputMode:  'auto' | 'manual';
+    inputMode:  InputMode;
     latitude:   number;
     longitude:  number;
     dateTime:   string | null;
-    theme:      'daylight' | 'dark' | 'redlight';
-    units:      'decimal' | 'dms';
+    theme:      Theme;
+    units:      Units;
 }
 
 const defaultSettings: Settings = {
