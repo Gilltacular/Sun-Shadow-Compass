@@ -1,19 +1,23 @@
 <script lang="ts">
     import type { SunData } from '../types';
+    import { dmsConvert } from '../utils/dmsConverter';
+    import { settingsStore } from '../stores/settingsStore';
 
     let { sunData }: { sunData: SunData } = $props();
 
     const tier = $derived(sunData.solarAltitude > 0 ? 1 : sunData.solarAltitude > -18 ? 2 : 3);
+    const dmsResult = $derived(dmsConvert(sunData.shadowAngle));
+    const formattedAngle = $derived($settingsStore.units === 'decimal' ? `${ sunData.shadowAngle.toFixed(0) }°` : `${ dmsResult.degrees }° ${ dmsResult.minutes }' ${ dmsResult.seconds }"`);
 </script>
 
 {#if tier === 1 }
     <div class="mainElement">
-        <h1 class="angleMessage">{ sunData.shadowAngle }°</h1>
+        <h1 class="angleMessage">{ formattedAngle }</h1>
         <!-- no message -->
     </div>
 {:else if tier === 2 }
     <div class="mainElement">
-        <h1 class="angleMessage dimmed">{ sunData.shadowAngle }°</h1>
+        <h1 class="angleMessage dimmed">{ formattedAngle }</h1>
         <p class="messages">Sun below horizon — theoretical bearing</p>
     </div>
 {:else}
