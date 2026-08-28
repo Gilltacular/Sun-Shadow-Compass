@@ -7,7 +7,7 @@
 
     const tier = $derived(sunData.solarAltitude > 0 ? 1 : sunData.solarAltitude > -18 ? 2 : 3);
     const dmsResult = $derived(dmsConvert(sunData.shadowAngle));
-    const formattedAngle = $derived($settingsStore.units === 'decimal' ? `${ sunData.shadowAngle.toFixed(0) }°` : `${ dmsResult.degrees }° ${ dmsResult.minutes }' ${ dmsResult.seconds }"`);
+    const formattedAngle = $derived($settingsStore.units === 'decimal' ? `${ sunData.shadowAngle.toFixed($settingsStore.decimalPrecision) }°` : `${ dmsResult.degrees }° ${ dmsResult.minutes }' ${ dmsResult.seconds }"`);
 </script>
 
 {#if tier === 1 }

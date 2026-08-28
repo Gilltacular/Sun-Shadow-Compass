@@ -3,21 +3,23 @@ import { writable } from 'svelte/store';
 import type { Theme, Units, InputMode } from '../types/index';
 
 export interface Settings {
-    inputMode:  InputMode;
-    latitude:   number;
-    longitude:  number;
-    dateTime:   string | null;
-    theme:      Theme;
-    units:      Units;
+    inputMode:          InputMode;
+    latitude:           number;
+    longitude:          number;
+    dateTime:           string | null;
+    theme:              Theme;
+    units:              Units;
+    decimalPrecision:   0 | 1 | 2 | 3;
 }
 
 const defaultSettings: Settings = {
-    inputMode:  'auto',
-    latitude:   0,
-    longitude:  0,
-    dateTime:   null,
-    theme:      'daylight',
-    units:      'decimal',
+    inputMode:          'auto',
+    latitude:           0,
+    longitude:          0,
+    dateTime:           null,
+    theme:              'daylight',
+    units:              'decimal',
+    decimalPrecision:   3
 };
 
 export function loadSettings(): Settings {
@@ -25,7 +27,10 @@ export function loadSettings(): Settings {
         const savedSettings = localStorage.getItem("sun-shadow-compass-settings");
 
         if (savedSettings){
-            return JSON.parse(savedSettings);
+            const parsedSettings = JSON.parse(savedSettings);
+            const merged = { ...defaultSettings, ...parsedSettings };
+            merged.dateTime = parsedSettings.dateTime || null;  // Normalize empty strings to null
+            return merged;
         } else {
             return defaultSettings;
         }
