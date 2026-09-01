@@ -15,15 +15,15 @@ export default defineConfig({
                 theme_color:        '#ffffff',
                 background_color:   '#ffffff',
                 display:            'standalone',
-                start_url:          '/',
+                start_url:          '/Sun-Shadow-Compass/',
                 icons: [
                     {
-                        src:        '/icon-192.png',
+                        src:        '/Sun-Shadow-Compass/icon-192.png',
                         sizes:      '192x192',
                         type:       'image/png'
                     },
                     {
-                        src:        '/icon-512.png',
+                        src:        '/Sun-Shadow-Compass/icon-512.png',
                         sizes:      '512x512',
                         type:      'image/png'
                     }
@@ -35,5 +35,5 @@ export default defineConfig({
         })
     ],
     build: {outDir: 'dist'},
-    base: '/'
+    base: '/Sun-Shadow-Compass/'
 })
