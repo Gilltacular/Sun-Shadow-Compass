@@ -11,12 +11,15 @@
     let errorMessage = $state<string | null>(null);
 
     $effect(() => {
+
+        const controller = new AbortController();
+        
         if ($settingsStore.inputMode === 'auto') {
             console.log("Auto mode active");
 
             (async () => {
                 try {
-                    const location = await getUserLocation();
+                    const location = await getUserLocation(controller.signal);
                     console.log("Got location:", location);
                     settingsStore.update(settings => ({
                         ...settings,
@@ -39,9 +42,14 @@
                     }
 
                     settingsStore.update(settings => ({ ...settings, inputMode: 'manual' }));
+
                 }
+                
             })();
         }
+        return () => {
+            controller.abort();
+        };
     });
 
     const sunData = $derived(calcSunData(
