@@ -2,9 +2,9 @@
 <script lang="ts">
     import { settingsStore } from '../stores/settingsStore';
 
-    let { close }: { close: () => void } = $props();
     let dtInput: HTMLInputElement | undefined = $state();
     let dateTimeValid = $state(true);
+    let { close, onRequestLocation }: { close: () => void; onRequestLocation: () => void } = $props();
 </script>
 
 <div 
@@ -74,7 +74,13 @@
 
                 <!-- Auto/Manual Mode Toggle -->
                 <p>AUTO / MANUAL TOGGLE</p>
-                <button onclick={() => settingsStore.update(settings => ({ ...settings, inputMode: settings.inputMode === 'auto' ? 'manual' : 'auto' }))}>{$settingsStore.inputMode === 'auto' ? 'AUTO' : 'MANUAL' }</button>
+                <button onclick={() => {
+                    const newMode = $settingsStore.inputMode === 'auto' ? 'manual' : 'auto';
+                    settingsStore.update(settings => ({ ...settings, inputMode: newMode }));
+                    if (newMode === 'auto') {
+                        onRequestLocation();
+                    }
+                }}>{$settingsStore.inputMode === 'auto' ? 'AUTO' : 'MANUAL' }</button>
                 <i>(TOGGLES AUTO ↔ MANUAL)</i>
         
                 <!-- Show if toggled "Manual" -->

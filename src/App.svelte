@@ -7,50 +7,55 @@
     import SettingsPanel from './components/SettingsPanel.svelte';
     import { getUserLocation } from './utils/geoLocation';
     import ErrorMessage from './components/ErrorMessage.svelte';
+    import { get } from 'svelte/store';
 
     let errorMessage = $state<string | null>(null);
+    let geoController: AbortController | null = null;
 
-    $effect(() => {
+    if (get(settingsStore).inputMode === 'auto') {
+        requestLocation();
+    }
 
-        const controller = new AbortController();
-        
-        if ($settingsStore.inputMode === 'auto') {
-            console.log("Auto mode active");
-
-            (async () => {
-                try {
-                    const location = await getUserLocation(controller.signal);
-                    console.log("Got location:", location);
-                    settingsStore.update(settings => ({
-                        ...settings,
-                        latitude: location.latitude,
-                        longitude: location.longitude
-                    }));
-                } catch (error) {
-                    if (error instanceof GeolocationPositionError) {
-                        if (error.code === 1) {
-                            errorMessage = "Location permission denied. Switched to manual mode. Enable location access and try again.";
-                        } else if (error.code === 2) {
-                            errorMessage = "GPS signal unavailable. Switched to manual mode. Check device location settings.";
-                        } else if (error.code === 3) {
-                            errorMessage = "Location request timed out. Switched to manual mode. Try again.";
-                        } else {
-                            errorMessage = "Unknown location error. Switched to manual mode.";
-                        }
-                    } else {
-                        errorMessage = "Unexpected error. Switched to manual mode.";
-                    }
-
-                    settingsStore.update(settings => ({ ...settings, inputMode: 'manual' }));
-
-                }
-                
-            })();
+    function requestLocation(): void {
+        // 1. Kill any request from a previous run
+        if (geoController) {
+            geoController.abort();
         }
-        return () => {
-            controller.abort();
-        };
-    });
+
+        // 2. New controller becomes the active one
+        geoController = new AbortController();
+
+        (async () => {
+            try {
+                const location = await getUserLocation(geoController!.signal);
+                console.log("Got location:", location);
+                settingsStore.update(settings => ({
+                    ...settings,
+                    latitude: location.latitude,
+                    longitude: location.longitude
+                }));
+            } catch (error) {
+                if (error instanceof DOMException && error.name === 'AbortError') {
+                    return;
+                }
+                if (error instanceof GeolocationPositionError) {
+                    if (error.code === 1) {
+                        errorMessage = "Location permission denied. Switched to manual mode. Enable location access and try again.";
+                    } else if (error.code === 2) {
+                        errorMessage = "GPS signal unavailable. Switched to manual mode. Check device location settings.";
+                    } else if (error.code === 3) {
+                        errorMessage = "Location request timed out. Switched to manual mode. Try again.";
+                    } else {
+                        errorMessage = "Unknown location error. Switched to manual mode.";
+                    }
+                } else {
+                    errorMessage = "Unexpected error. Switched to manual mode.";
+                }
+
+                settingsStore.update(settings => ({ ...settings, inputMode: 'manual' }));
+            }
+        })();
+    }
 
     const sunData = $derived(calcSunData(
         $settingsStore.dateTime ? new Date($settingsStore.dateTime) : new Date(),
@@ -78,7 +83,7 @@
 {/if}
 
 {#if panelOpen}
-    <SettingsPanel close={() => panelOpen = false} />
+    <SettingsPanel close={() => panelOpen = false} onRequestLocation={requestLocation} />
 {/if}
 
 <style>
