@@ -6,6 +6,8 @@ export interface Settings {
     inputMode:          InputMode;
     latitude:           number;
     longitude:          number;
+    gpsLatitude:        number | null;
+    gpsLongitude:       number | null;
     dateTime:           string | null;
     theme:              Theme;
     units:              Units;
@@ -16,6 +18,8 @@ const defaultSettings: Settings = {
     inputMode:          'auto',
     latitude:           0,
     longitude:          0,
+    gpsLatitude:        null,
+    gpsLongitude:       null,
     dateTime:           null,
     theme:              'daylight',
     units:              'decimal',
