@@ -83,7 +83,7 @@
                 }}>{$settingsStore.inputMode === 'auto' ? 'AUTO' : 'MANUAL' }</button>
                 <i>(TOGGLES AUTO ↔ MANUAL)</i>
         
-                <!-- Show if toggled "Manual" -->
+                <!-- Show input boxes if toggled "Manual" -->
                 {#if $settingsStore.inputMode === 'manual'}
 
                     <p>LATITUDE</p>
@@ -117,6 +117,22 @@
                         <p class="input-error">Please complete or clear the date and time</p>
                     {/if}
                     <i>(FOR FUTURE OR PAST CALCULATIONS)</i>
+                    
+                <!-- Else show disabled boxes with Auto Mode inputs -->
+                {:else}
+                    <p>LATITUDE</p>
+                    <input 
+                        type="number" 
+                        value={$settingsStore.latitude} 
+                        disabled
+                    />
+
+                    <p>LONGITUDE</p>
+                    <input 
+                        type="number" 
+                        value={$settingsStore.longitude} 
+                        disabled
+                    />
                 {/if}
             </div>
         </div>
