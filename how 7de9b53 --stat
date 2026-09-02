@@ -1,0 +1,31 @@
+[1mdiff --git a/vite.config.ts b/vite.config.ts[m
+[1mindex 310ac14..38aff38 100644[m
+[1m--- a/vite.config.ts[m
+[1m+++ b/vite.config.ts[m
+[36m@@ -15,15 +15,15 @@[m [mexport default defineConfig({[m
+                 theme_color:        '#ffffff',[m
+                 background_color:   '#ffffff',[m
+                 display:            'standalone',[m
+[31m-                start_url:          '/',[m
+[32m+[m[32m                start_url:          '/Sun-Shadow-Compass/',[m
+                 icons: [[m
+                     {[m
+[31m-                        src:        '/icon-192.png',[m
+[32m+[m[32m                        src:        '/Sun-Shadow-Compass/icon-192.png',[m
+                         sizes:      '192x192',[m
+                         type:       'image/png'[m
+                     },[m
+                     {[m
+[31m-                        src:        '/icon-512.png',[m
+[32m+[m[32m                        src:        '/Sun-Shadow-Compass/icon-512.png',[m
+                         sizes:      '512x512',[m
+                         type:      'image/png'[m
+                     }[m
+[36m@@ -35,5 +35,5 @@[m [mexport default defineConfig({[m
+         })[m
+     ],[m
+     build: {outDir: 'dist'},[m
+[31m-    base: '/'[m
+[32m+[m[32m    base: '/Sun-Shadow-Compass/'[m
+ })[m
+\ No newline at end of file[m

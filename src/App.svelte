@@ -8,6 +8,7 @@
     import { getUserLocation } from './utils/geoLocation';
     import ErrorMessage from './components/ErrorMessage.svelte';
     import { get } from 'svelte/store';
+    import type { InputMode } from './types';
 
     let errorMessage = $state<string | null>(null);
     let geoController: AbortController | null = null;
@@ -57,8 +58,15 @@
         })();
     }
 
+    function resolveCalculationTime(mode: InputMode, stored: string | null): Date {
+        if (mode === 'auto') {
+            return new Date();
+        }
+        return stored ? new Date(stored) : new Date();
+    }
+
     const sunData = $derived(calcSunData(
-        $settingsStore.dateTime ? new Date($settingsStore.dateTime) : new Date(),
+        resolveCalculationTime($settingsStore.inputMode, $settingsStore.dateTime),
         $settingsStore.latitude,
         $settingsStore.longitude,
         getUtcOffset()
