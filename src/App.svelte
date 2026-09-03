@@ -32,8 +32,8 @@
                 console.log("Got location:", location);
                 settingsStore.update(settings => ({
                     ...settings,
-                    latitude: location.latitude,
-                    longitude: location.longitude
+                    gpsLatitude: location.latitude,
+                    gpsLongitude: location.longitude
                 }));
             } catch (error) {
                 if (error instanceof DOMException && error.name === 'AbortError') {

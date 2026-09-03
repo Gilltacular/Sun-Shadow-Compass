@@ -123,14 +123,14 @@
                     <p>LATITUDE</p>
                     <input 
                         type="number" 
-                        value={$settingsStore.latitude} 
+                        value={$settingsStore.gpsLatitude ?? ''} 
                         disabled
                     />
 
                     <p>LONGITUDE</p>
                     <input 
                         type="number" 
-                        value={$settingsStore.longitude} 
+                        value={$settingsStore.gpsLongitude ?? ''}
                         disabled
                     />
                 {/if}
